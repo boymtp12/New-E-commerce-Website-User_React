@@ -43,8 +43,8 @@ const CategoryMenu = () => {
           return (
             <Link
               // onClick={() => handleClick(item)}
-              to={`products-by/${item}`}
-              key={item}
+              to={`products-by-category/${item.name}/${item.id}`}
+              key={item.id}
               style={{
                 padding: "8px 16px",
                 margin: "0 12px",
@@ -52,7 +52,7 @@ const CategoryMenu = () => {
                 cursor: "pointer",
               }}
             >
-              {item}
+              {item.name}
             </Link>
           );
         })}

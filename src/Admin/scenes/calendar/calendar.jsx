@@ -80,8 +80,8 @@ const Form = () => {
               >
                 <option value={null}>Select a category</option>
                 {categoryOptions.map((category) => (
-                  <option key={category} value={category}>
-                    {category}
+                  <option key={category.id} value={category.name}>
+                    {category.name}
                   </option>
                 ))}
             </TextField>

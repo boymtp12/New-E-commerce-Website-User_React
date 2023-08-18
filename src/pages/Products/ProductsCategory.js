@@ -3,16 +3,20 @@ import ProductCard from "../../components/Elements/ProductCard";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { changeDataProductByCategory } from "../../redux/reducer_action/BaseReducerAction";
+import { useMediaQuery } from "react-responsive";
 
 const ProductsCategory = () => {
-  const { categoryName } = useParams();
+  const { categoryName, categoryId } = useParams();
   const dispatch = useDispatch();
-  const data_product_by_category = useSelector(state => state.base.data_product_by_category);
+  const data_product_by_category = useSelector(
+    (state) => state.base.data_product_by_category
+  );
   const [show, setShow] = useState(false);
   // const [products, setProducts] = useState([]);
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   useEffect(() => {
-    fetch(`http://localhost:8080/product-by-category?categoryName=${categoryName}`)
+    fetch(`http://localhost:8080/product-by-category/${categoryId}`)
       .then((response) => response.json())
       .then((rs) => {
         console.log(rs);
@@ -26,7 +30,9 @@ const ProductsCategory = () => {
       <section className="my-5">
         <div className="m-5 flex justify-between">
           <span className="text-2xl font-semibold dark:text-slate-100 mb-5">
-            <Link to="../">Home</Link> {">"} <span style={{color: '#ef6832'}}>{categoryName}</span> ({data_product_by_category.length})
+            <Link to="../">Home</Link> {">"}{" "}
+            <span style={{ color: "#ef6832" }}>{categoryName}</span> (
+            {data_product_by_category.length})
           </span>
           <span>
             <button
@@ -46,11 +52,19 @@ const ProductsCategory = () => {
             </button>
           </span>
         </div>
-        <div className="flex flex-wrap lg:flex-row">
-          {data_product_by_category.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {isTabletOrMobile ? (
+          <div className="flex flex-wrap lg:flex-row" style={{justifyContent: 'center'}}>
+            {data_product_by_category.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-wrap lg:flex-row">
+            {data_product_by_category.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );
