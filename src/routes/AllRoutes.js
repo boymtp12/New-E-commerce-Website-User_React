@@ -22,6 +22,7 @@ import Pie from "../Admin/scenes/pie";
 import FAQ from "../Admin/scenes/faq";
 import Geography from "../Admin/scenes/geography";
 import ProductsCategory from "../pages/Products/ProductsCategory";
+import RouterTest from "../pages/RouteTest";
 //import Calendar from "../Admin/scenes/calendar";
 
 const AllRoutes = () => {
@@ -31,7 +32,7 @@ const AllRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<ProductsList />} />
         <Route path="/products/:id" element={<ProductsDetails />} />
-        <Route path="/products-by/:categoryName" element={<ProductsCategory />} />
+        <Route path="/products-by-category/:categoryName/:categoryId" element={<ProductsCategory />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="/info-user" element={<CustomerInfo />} />
@@ -40,6 +41,7 @@ const AllRoutes = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/check-out" element={<Checkout />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/test" element={<RouterTest />} />
         <Route path="/admin/" element={<Dashboard />} />
         <Route path="/admin/team" element={<Team />} />
         <Route path="/admin/contacts" element={<Contacts />} />
